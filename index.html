@@ -12,8 +12,8 @@
     >
       <h1 class="text-2xl font-bold px-6">Calculadora de investimentos</h1>
 
-      <form class="w-full">
-        <div class="flex w-full flex-col px-6 my-2">
+      <form id="investment-form" class="w-full">
+        <div class="flex w-full flex-col px-6 my-2 h-[4.25rem]">
           <label for="starting-amount" class="font-bold text-gray-700"
             >Investimento Inicial</label
           >
@@ -29,12 +29,14 @@
               type="text"
               class="w-5/6 rounded-r-lg px-2"
               placeholder="0.00"
+              required
               id="starting-amount"
+              name="starting-amount"
             />
           </div>
         </div>
 
-        <div class="flex w-full flex-col px-6 my-2">
+        <div class="flex w-full flex-col px-6 my-2 h-[4.25rem]">
           <label for="additional-contribution" class="font-bold text-gray-700"
             >Aportes Adicionais</label
           >
@@ -51,18 +53,21 @@
               class="w-5/6 rounded-r-lg px-2"
               placeholder="0.00"
               id="additional-contribution"
+              name="additional-contribution"
             />
           </div>
         </div>
 
-        <div class="flex w-full flex-col px-6 my-2">
+        <div class="flex w-full flex-col px-6 my-2 h-[4.25rem]">
           <label for="time-amount" class="font-bold text-gray-700">Prazo</label>
           <div class="flex">
             <input
               type="text"
               class="w-2/3 rounded-l-lg px-2"
               id="time-amount"
+              required
               placeholder="0"
+              name="time-amount"
             />
 
             <select
@@ -75,7 +80,7 @@
           </div>
         </div>
 
-        <div class="flex w-full flex-col px-6 my-2">
+        <div class="flex w-full flex-col px-6 my-2 h-[4.25rem]">
           <label for="return-rate" class="font-bold text-gray-700"
             >Rentabilidade</label
           >
@@ -91,7 +96,9 @@
               type="text"
               class="w-1/2 px-2"
               id="return-rate"
+              required
               placeholder="0"
+              name="return-rate"
             />
 
             <select
@@ -104,8 +111,8 @@
           </div>
         </div>
 
-        <div class="flex w-full flex-col px-6 my-2">
-          <label for="text-rate" class="font-bold text-gray-700"
+        <div class="flex w-full flex-col px-6 my-2 h-[4.25rem]">
+          <label for="tax-rate" class="font-bold text-gray-700"
             >Impostos sobre o Lucro</label
           >
           <div class="flex">
@@ -119,25 +126,32 @@
             <input
               type="text"
               class="w-5/6 rounded-r-lg px-2"
-              id="text-rate"
+              id="tax-rate"
+              required
               placeholder="0"
+              name="tax-rate"
             />
           </div>
         </div>
       </form>
       <div class="flex h-12 px-6 my-8 w-full gap-2">
         <button
+          id="calculate-results"
+          form="investment-form"
           class="w-1/2 rounded-lg bg-emerald-950 text-slate-200 hover:bg-emerald-500"
         >
           Calcular
         </button>
 
-        <button class="w-1/2 rounded-lg hover:bg-emerald-800">Limpar</button>
+        <button id="clear-form" class="w-1/2 rounded-lg hover:bg-emerald-800">
+          Limpar
+        </button>
       </div>
     </aside>
 
     <main>
       <p>Resultados:</p>
     </main>
+    <script type="module" src="./main.js"></script>
   </body>
 </html>
