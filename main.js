@@ -9,7 +9,11 @@ const clearFormButton = document.getElementById("clear-form");
 let doughnutChartReference = {};
 let progressionChartReference = {};
 
-function formatCurrency(value) {
+function formatCurrencyToTable(value) {
+  return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+}
+
+function formatCurrencyToGraph(value) {
   return value.toFixed(2);
 }
 
@@ -51,11 +55,11 @@ function renderProgression(evt) {
       datasets: [
         {
           data: [
-            formatCurrency(finalInvestmentObject.investedAmount),
-            formatCurrency(
+            formatCurrencyToGraph(finalInvestmentObject.investedAmount),
+            formatCurrencyToGraph(
               finalInvestmentObject.totalIinterestReturns * (1 - taxRate / 100)
             ),
-            formatCurrency(
+            formatCurrencyToGraph(
               finalInvestmentObject.totalIinterestReturns * (taxRate / 100)
             ),
           ],
@@ -78,14 +82,14 @@ function renderProgression(evt) {
         {
           label: "Total Investido",
           data: returnsArray.map((investmentObject) =>
-            formatCurrency(investmentObject.investedAmount)
+            formatCurrencyToGraph(investmentObject.investedAmount)
           ),
           backgroundColor: "rgb(255, 99, 132)",
         },
         {
           label: "Retorno do Investimento",
           data: returnsArray.map((investmentObject) =>
-            formatCurrency(investmentObject.interestReturns)
+            formatCurrencyToGraph(investmentObject.interestReturns)
           ),
           backgroundColor: "rgb(54, 162, 235)",
         },
@@ -172,5 +176,18 @@ for (const formElement of form) {
   }
 }
 
-// form.addEventListener("submit", renderProgression);
+const mainEL = document.querySelector("main");
+const carouselEl = document.querySelector("carousel");
+const nextButton = document.querySelector("slide-arrow-next");
+const previousButton = document.querySelector("slide-arrow-previous");
+
+nextButton.addEventListener("click", () => {
+  carouselEl.scrollLeft += mainEL.clientWidth;
+});
+
+previousButton.addEventListener("click", () => {
+  carouselEl.scrollLeft -= mainEL.clientWidth;
+});
+
+form.addEventListener("submit", renderProgression);
 clearFormButton.addEventListener("click", clearForm);
